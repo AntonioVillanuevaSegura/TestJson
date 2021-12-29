@@ -8,10 +8,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.testjson.databinding.ActivityMainBinding
+import com.journeyapps.barcodescanner.ScanContract
+import com.journeyapps.barcodescanner.ScanIntentResult
 import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONStringer
 import org.json.JSONTokener
+
+import com.journeyapps.barcodescanner.ScanOptions
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
@@ -44,5 +48,44 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+
+
+        //Si pulsa boton arranca scanner
+       botonJson.setOnClickListener{
+            //lanzaScanner.launch(ScanOptions())
+
+            //Personifico ciertas opciones
+            val options = ScanOptions()
+            //options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES)
+            options.setPrompt("Scan a barcode")
+            //options.setCameraId(0) // Use a specific camera of the device
+
+            options.setBeepEnabled(true)
+            options.setBarcodeImageEnabled(true)
+            options.setOrientationLocked(false)
+            options.setTimeout(25000)
+            //options.setTorchEnabled(true)
+
+            //Lanza el scanner podemos prescindir de lo anterior
+            lanzaScanner.launch(options)
+
+        }
+
+
+
     }
+
+
+    // Registre el lanzador y el controlador de resultados
+    private val lanzaScanner = registerForActivityResult(ScanContract())
+    {    result: ScanIntentResult ->
+        if (result.contents == null) {/*No hace nada si no ha recuperado nada*/ }
+        else {
+            //Muestra scan en EditView @+id/textViewReadText
+            binding.textView.setText(result.contents)//Muestra el valor scaneado en viewText
+        }
+    }
+
+
 }
