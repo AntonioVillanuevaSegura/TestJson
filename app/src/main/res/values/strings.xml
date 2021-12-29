@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">TestJson</string>
+    <string name="textview">TextView</string>
+    <string name="json">JSON</string>
+    <string name="nom">NOM:</string>
+    <string name="num">NUM:</string>
+    <string name="ip">ip:</string>
+    <string name="port">Port:</string>
+    <string name="nmsg">NMSG:</string>
+</resources>

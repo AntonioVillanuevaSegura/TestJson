@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:text="@string/nom"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEtiquetteNom"
+        app:layout_constraintStart_toEndOf="@+id/textViewEtiquetteNom"
+        app:layout_constraintTop_toTopOf="@+id/textViewEtiquetteNom" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/textview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/buttonAnalisis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/json"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <TextView
+        android:id="@+id/textViewEtiquetteNom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/nom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buttonAnalisis" />
+
+    <TextView
+        android:id="@+id/textViewEtiquetteNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/num"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEtiquetteNom" />
+
+    <TextView
+        android:id="@+id/textViewNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:text="@string/num"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEtiquetteNum"
+        app:layout_constraintStart_toEndOf="@+id/textViewEtiquetteNum"
+        app:layout_constraintTop_toTopOf="@+id/textViewEtiquetteNum" />
+
+    <TextView
+        android:id="@+id/textViewEtiquette"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/ip"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEtiquetteNum" />
+
+    <TextView
+        android:id="@+id/textViewIp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:text="@string/ip"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEtiquette"
+        app:layout_constraintStart_toEndOf="@+id/textViewEtiquette"
+        app:layout_constraintTop_toTopOf="@+id/textViewEtiquette" />
+
+    <TextView
+        android:id="@+id/textViewEtiquettePort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/port"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEtiquette" />
+
+    <TextView
+        android:id="@+id/textViewPort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="64dp"
+        android:text="@string/port"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEtiquettePort"
+        app:layout_constraintStart_toEndOf="@+id/textViewEtiquettePort"
+        app:layout_constraintTop_toTopOf="@+id/textViewEtiquettePort" />
+
+    <TextView
+        android:id="@+id/textViewEtiquetteNmsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/nmsg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEtiquettePort" />
+
+    <TextView
+        android:id="@+id/textViewNmsg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="@string/nmsg"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEtiquetteNmsg"
+        app:layout_constraintStart_toEndOf="@+id/textViewEtiquetteNmsg"
+        app:layout_constraintTop_toTopOf="@+id/textViewEtiquetteNmsg" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
