@@ -7,4 +7,5 @@
     <string name="ip">ip:</string>
     <string name="port">Port:</string>
     <string name="nmsg">NMSG:</string>
+    <string name="id">id:</string>
 </resources>

@@ -138,4 +138,24 @@
         app:layout_constraintTop_toBottomOf="@+id/textView"
         tools:ignore="SpeakableTextPresentCheck" />
 
+    <TextView
+        android:id="@+id/textViewEtiquetteId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/id"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEtiquetteNmsg" />
+
+    <TextView
+        android:id="@+id/textViewId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="80dp"
+        android:text="@string/id"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewEtiquetteId"
+        app:layout_constraintStart_toEndOf="@+id/textViewEtiquetteId"
+        app:layout_constraintTop_toTopOf="@+id/textViewEtiquetteId" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

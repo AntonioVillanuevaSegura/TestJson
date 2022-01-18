@@ -14,6 +14,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import org.json.JSONStringer
 import org.json.JSONTokener
+import org.json.JSONException
 
 
 import com.journeyapps.barcodescanner.ScanOptions
@@ -27,13 +28,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
 
         //Bindings
-        var botonJson=binding.buttonAnalisis
-        var txt =binding.textView
-        var nom=binding.textViewNom
-        var num=binding.textViewNum
-        var ip=binding.textViewIp
-        var port=binding.textViewPort
-        var nmsg=binding.textViewNmsg
+        val botonJson=binding.buttonAnalisis
+        val txt =binding.textView
+        val nom=binding.textViewNom
+        val num=binding.textViewNum
+        val ip=binding.textViewIp
+        val port=binding.textViewPort
+        val nmsg=binding.textViewNmsg
+        val id=binding.textViewId
 
         //var ejemplo ="""  [{'nom': 'DOUCHE', 'num': 0, 'ip': '192.168.6.101', 'port': '31420', 'nmsg': '0'}] """
         /*
@@ -79,33 +81,26 @@ class MainActivity : AppCompatActivity() {
         else {
             //Muestra scan en EditView @+id/textViewReadText
             var txt=binding.textView
-
             txt.setText(result.contents)//Muestra el valor scaneado en viewText
+
             if (txt.text.isNotEmpty()) {
+                //Ejemplo sin utilizar scanner
+               var ejemplo ="{'nom': 'DOUCHE', 'num': '0', 'ip': '192.168.6.101', 'port': '31420', 'nmsg': '0'}"
 
-                var jsonArray = JSONArray(txt.text.toString()) //Creo un array JSON desde el ejemplo
-
-                jsonRead(jsonArray) //Lee el array JSON , escribe campos IP,PORT, NMSG
+                //Crea un jsonObject se tokeniza
+                val jsonObject = JSONTokener(ejemplo).nextValue() as JSONObject
+                jsonRead(jsonObject)
             }
 
         }
     }
 
-    //Lee el array JSON , escribe campos IP,PORT, NMSG
-    fun jsonRead(jsonArray: JSONArray){
-
-        if (jsonArray.length()==0){return}
-
-        for (jsonIndex in 0..(jsonArray.length() - 1)) { //Recorro el array
-
-            binding.textViewNom.setText(jsonArray.getJSONObject(jsonIndex).getString("nom"))
-            binding.textViewNum.setText(jsonArray.getJSONObject(jsonIndex).getString("num"))
-            binding.textViewIp.setText(jsonArray.getJSONObject(jsonIndex).getString("ip"))
-            binding.textViewPort.setText(jsonArray.getJSONObject(jsonIndex).getString("port"))
-            binding.textViewNmsg.setText(jsonArray.getJSONObject(jsonIndex).getString("nmsg"))
-        }
-
-
+    //Lee un objeto JSON y escribe los campos
+    fun jsonRead (jsonobject:JSONObject){
+        binding.textViewNom.setText(jsonobject.getString("nom"))
+        binding.textViewNum.setText(jsonobject.getString("num"))
+        binding.textViewIp.setText(jsonobject.getString("ip"))
+        binding.textViewPort.setText(jsonobject.getString("port"))
+        binding.textViewNmsg.setText(jsonobject.getString("nmsg"))
     }
-
 }
