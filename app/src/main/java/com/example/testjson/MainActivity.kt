@@ -29,26 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         //Bindings
         val botonJson=binding.buttonAnalisis
-        val txt =binding.textView
-        val nom=binding.textViewNom
-        val num=binding.textViewNum
-        val ip=binding.textViewIp
-        val port=binding.textViewPort
-        val nmsg=binding.textViewNmsg
-        val id=binding.textViewId
-
-        //var ejemplo ="""  [{'nom': 'DOUCHE', 'num': 0, 'ip': '192.168.6.101', 'port': '31420', 'nmsg': '0'}] """
-        /*
-         var ejemplo=binding.textView.text
-
-
-         if (ejemplo.isNotEmpty()) {
-         var jsonArray = JSONArray(ejemplo) //Creo un array JSON desde el ejemplo
-
-         jsonRead(jsonArray) //Lee el array JSON , escribe campos IP,PORT, NMSG
-         }
-
-          */
 
         //Si pulsa boton arranca scanner
        botonJson.setOnClickListener{
@@ -80,22 +60,27 @@ class MainActivity : AppCompatActivity() {
         if (result.contents == null) {/*No hace nada si no ha recuperado nada*/ }
         else {
             //Muestra scan en EditView @+id/textViewReadText
-            var txt=binding.textView
+            val txt=binding.textView
             txt.setText(result.contents)//Muestra el valor scaneado en viewText
 
             if (txt.text.isNotEmpty()) {
+
                 //Ejemplo sin utilizar scanner
-               var ejemplo ="{'nom': 'DOUCHE', 'num': '0', 'ip': '192.168.6.101', 'port': '31420', 'nmsg': '0'}"
+               //var ejemplo ="{'nom': 'DOUCHE', 'num': '0', 'ip': '192.168.6.101', 'port': '31420', 'nmsg': '0'}"
+
+                //Version que utiliza el texto en el textView
+               // val jsonObject = JSONTokener(txt.text.toString()).nextValue() as JSONObject
+               // jsonRead(jsonObject)
 
                 //Crea un jsonObject se tokeniza
-                val jsonObject = JSONTokener(ejemplo).nextValue() as JSONObject
+                val jsonObject = JSONTokener(result.contents).nextValue() as JSONObject
                 jsonRead(jsonObject)
-            }
 
+            }
         }
     }
 
-    //Lee un objeto JSON y escribe los campos
+    //Lee un objeto JSON y escribe los campos en la vista android
     fun jsonRead (jsonobject:JSONObject){
         binding.textViewNom.setText(jsonobject.getString("nom"))
         binding.textViewNum.setText(jsonobject.getString("num"))
