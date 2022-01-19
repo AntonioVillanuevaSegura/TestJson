@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
 
                //{'nom': 'DOUCHE', 'num': '0', 'ip': '192.168.6.101', 'port': '31420', 'nmsg': '0'}
 
-                if (testJson(result.contents)) {//Analiza el texto , compatibilidad json
+                if (testJson(result.contents)) {//Analiza el texto , compatibilidad json    {'KEY':"VALUE","KEY2":"VALUE2"}
                     //Crea un jsonObject se tokeniza
                     val jsonObject = JSONTokener(result.contents).nextValue() as JSONObject
                     jsonRead(jsonObject)
@@ -77,6 +77,7 @@ class MainActivity : AppCompatActivity() {
 
     /*Analisis texto si es compatible JSON
         No trabaja con un numero fijo de elementos , pueden faltar
+       ejemplo de estructura  {'KEY':"VALUE","KEY2":"VALUE2"}
      */
     fun testJson ( txt : String):Boolean{
 
@@ -87,7 +88,6 @@ class MainActivity : AppCompatActivity() {
         //Al inicio y al final contiene llaves {} ?
         if (txt.first()!='{' ){return false}
         if (txt.last()!='}') {return false}
-
 
         //Estructura ejemplo {'nom': 'DOUCHE', 'num': '0', 'ip': '192.168.6.101', 'port': '31420', 'nmsg': '0'}
 
@@ -113,7 +113,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     /*Lee un objeto JSON y escribe los campos en la vista android
-        Permite utilizar una cantidad de elementos variable
+    Permite utilizar una cantidad de elementos variable
+    ejemplo de estructura  {'KEY':"VALUE","KEY2":"VALUE2"}
      */
     fun jsonRead (jsonobject:JSONObject){
         /*
