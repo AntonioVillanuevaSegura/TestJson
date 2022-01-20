@@ -12,11 +12,10 @@ Create a JSON object from a string , use Context for error messages
 
     var jsonobject:JSONObject
 
-    init {//child constructor for the JSONObject
-        jsonobject=createJsonObject(txt)
-    }
+    //Child constructor for the JSONObject , from txt JSON string
+    init { jsonobject=createJsonObject(txt) }
 
-    fun testJson ( txt : String):Boolean{
+    fun testJson ( txt : String):Boolean{//Check if String can be converted ins JSON
         /*Analyze if the text is compatible JSON , returns true or false
          It does not work with a fixed number of KEY:VALUE elements, can use less values
          structure example {'KEY':"VALUE","KEY2":"VALUE2"}
@@ -52,7 +51,7 @@ Create a JSON object from a string , use Context for error messages
     }
 
     fun getValue (key:String):String{
-    //Returns value from  key , if it exists otherwise empty
+    //Returns value from  key , if it exists , otherwise empty
         if (jsonobject.has(key)){ return  jsonobject.getString(key) }
         return ""
     }
@@ -64,6 +63,5 @@ Create a JSON object from a string , use Context for error messages
         }else{ Toast.makeText (context, " ERROR QR !", Toast.LENGTH_SHORT).show() }
         return JSONObject()
     }
-
 
 }
