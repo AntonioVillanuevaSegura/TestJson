@@ -62,90 +62,17 @@ class MainActivity : AppCompatActivity() {
             txt.setText(result.contents)//Muestra el valor scaneado en viewText
 
             if (txt.text.isNotEmpty()) {
+              val json=Json(result.contents,this) //Instancia la clase Json con el String de la lectura
 
-               //{'nom': 'DOUCHE', 'num': '0', 'ip': '192.168.6.101', 'port': '31420', 'nmsg': '0'}
-
-                if (testJson(result.contents)) {//Analiza el texto , compatibilidad json    {'KEY':"VALUE","KEY2":"VALUE2"}
-                    //Crea un jsonObject se tokeniza
-                    val jsonObject = JSONTokener(result.contents).nextValue() as JSONObject
-                    jsonRead(jsonObject)
-                }else {txt.setText("Error QR !") }
+                //Bindings activity_main.xml
+                binding.textViewNom.setText(json.getValue("nom"))
+                binding.textViewNum.setText(json.getValue("num"))
+                binding.textViewIp.setText(json.getValue("ip"))
+                binding.textViewPort.setText(json.getValue("port"))
+                binding.textViewNmsg.setText(json.getValue("nmsg"))
 
             }
         }
     }
 
-    /*Analisis texto si es compatible JSON
-        No trabaja con un numero fijo de elementos , pueden faltar
-       ejemplo de estructura  {'KEY':"VALUE","KEY2":"VALUE2"}
-     */
-    fun testJson ( txt : String):Boolean{
-
-
-        //El texto esta vacio ?
-        if (txt.isEmpty()){return false}
-
-        //Al inicio y al final contiene llaves {} ?
-        if (txt.first()!='{' ){return false}
-        if (txt.last()!='}') {return false}
-
-        //Estructura ejemplo {'nom': 'DOUCHE', 'num': '0', 'ip': '192.168.6.101', 'port': '31420', 'nmsg': '0'}
-
-        var comas=0
-        var puntos=0
-        var comillas=0
-
-        //Analiza elementos :,' para el ejemplo anterior 5 puntos,4 comas, 18 comillas
-        for (n in txt){ //Cuenta ptos,comas,comillas
-            if (n==':') {puntos++}
-            if (n==',') {comas++}
-            if (n=='\'') {comillas++}
-        }
-
-        //Los puntos son igual a comas +1 ?
-        if (puntos != comas+1){ return false }
-
-        //Test ' comillas en el ejemplo elementos(5)*4=20
-        if (comillas != puntos*4){ return false }
-
-        return true
-
-    }
-
-    /*Lee un objeto JSON y escribe los campos en la vista android
-    Permite utilizar una cantidad de elementos variable
-    ejemplo de estructura  {'KEY':"VALUE","KEY2":"VALUE2"}
-     */
-    fun jsonRead (jsonobject:JSONObject){
-        /*
-        binding.textViewNom.setText(jsonobject.getString("nom"))
-        binding.textViewNum.setText(jsonobject.getString("num"))
-        binding.textViewIp.setText(jsonobject.getString("ip"))
-        binding.textViewPort.setText(jsonobject.getString("port"))
-        binding.textViewNmsg.setText(jsonobject.getString("nmsg"))
-         */
-
-
-        if (jsonobject.has("nom")){
-            binding.textViewNom.setText(jsonobject.getString("nom"))
-        }
-
-        if (jsonobject.has("num")) {
-            binding.textViewNum.setText(jsonobject.getString("num"))
-        }
-
-        if (jsonobject.has("ip")) {
-            binding.textViewIp.setText(jsonobject.getString("ip"))
-        }
-
-        if (jsonobject.has("port")) {
-            binding.textViewPort.setText(jsonobject.getString("port"))
-        }
-
-        if (jsonobject.has("nmsg")) {
-            binding.textViewNmsg.setText(jsonobject.getString("nmsg"))
-        }
-
-
-    }
 }

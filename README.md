@@ -1,9 +1,9 @@
-Una aplicacion tipo test para efectuar  test de scanner en formato json
+A test application to perform scanner tests in json format
 
-Lee los datos del scanner codigo QR en formato JSON 
+Read the data from the QR code scanner in JSON format
 
-En este ejemplo los campos KEYs son :
+In this example the KEYs fields are:
     nom,num,ip,port,nmsg,id  
 
-El formato JSON empleado es asi:
+The JSON format used is like this:
     {'KEY':"VALUE","KEY2":"VALUE2"}
