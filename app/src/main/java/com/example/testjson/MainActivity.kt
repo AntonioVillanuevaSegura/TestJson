@@ -6,15 +6,9 @@ package com.example.testjson
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import com.example.testjson.databinding.ActivityMainBinding
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
-import org.json.JSONArray
-import org.json.JSONObject
-import org.json.JSONStringer
-import org.json.JSONTokener
-import org.json.JSONException
 
 
 import com.journeyapps.barcodescanner.ScanOptions
@@ -27,27 +21,18 @@ class MainActivity : AppCompatActivity() {
         val view=binding.root
         setContentView(view)
 
-        //Bindings
+        //Binding Button
         val botonJson=binding.buttonAnalisis
 
-        //Si pulsa boton arranca scanner
-       botonJson.setOnClickListener{
-            //lanzaScanner.launch(ScanOptions())
+        //If you press the button, the scanner starts.
+        botonJson.setOnClickListener{
 
-            //Personifico ciertas opciones
-            val options = ScanOptions()
-            //options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES)
-            options.setPrompt("Scan a barcode")
-            //options.setCameraId(0) // Use a specific camera of the device
+        //We configure scanner options
+        val scanner = ScanOptions()
+        scannerOptions(scanner)
 
-            options.setBeepEnabled(true)
-            options.setBarcodeImageEnabled(true)
-            options.setOrientationLocked(false)
-            options.setTimeout(25000)
-            //options.setTorchEnabled(true)
-
-            //Lanza el scanner , podemos prescindir de lo anterior
-            lanzaScanner.launch(options)
+        //Launch the scanner, we can dispense the previous configuration code ....
+        lanzaScanner.launch(scanner)
 
         }
     }
@@ -55,24 +40,37 @@ class MainActivity : AppCompatActivity() {
     // Registre el lanzador y el controlador de resultados
     private val lanzaScanner = registerForActivityResult(ScanContract())
     {    result: ScanIntentResult ->
-        if (result.contents == null) {/*No hace nada si no ha recuperado nada*/ }
+        if (result.contents == null) {/*It doesn't do anything, if it hasn't retrieved anything */ }
         else {
-            //Muestra scan en EditView @+id/textViewReadText
+            //Show scanned QR in EditView @+id/textViewReadText
             val txt=binding.textView
-            txt.setText(result.contents)//Muestra el valor scaneado en viewText
+            txt.setText(result.contents)//Show scanned value in QR in viewTex
 
             if (txt.text.isNotEmpty()) {
-              val json=Json(result.contents,this) //Instancia la clase Json con el String de la lectura
-
-                //Bindings activity_main.xml
-                binding.textViewNom.setText(json.getValue("nom"))
-                binding.textViewNum.setText(json.getValue("num"))
-                binding.textViewIp.setText(json.getValue("ip"))
-                binding.textViewPort.setText(json.getValue("port"))
-                binding.textViewNmsg.setText(json.getValue("nmsg"))
-
+              val json=Json(result.contents,this) //Instantiate the Json class with the String of the QR reading
+                bindingViews(json) //Associate JSON reads value with views
             }
         }
     }
 
+    fun scannerOptions(scanner: ScanOptions){//Configure scanner options
+        //options.setDesiredBarcodeFormats(ScanOptions.ONE_D_CODE_TYPES)
+        scanner.setPrompt("Scan a barcode")
+        //options.setCameraId(0) // Use a specific camera of the device
+        scanner.setBeepEnabled(true)
+        scanner.setBarcodeImageEnabled(true)
+        scanner.setOrientationLocked(false)
+        scanner.setTimeout(25000)
+        //scanner.setTorchEnabled(true)
+    }
+
+    fun bindingViews (json:Json){//Bindind nom,num,ip,port,nmsg
+        //Bindings activity_main.xml
+        binding.textViewNom.setText(json.getValue("nom"))
+        binding.textViewNum.setText(json.getValue("num"))
+        binding.textViewIp.setText(json.getValue("ip"))
+        binding.textViewPort.setText(json.getValue("port"))
+        binding.textViewNmsg.setText(json.getValue("nmsg"))
+
+    }
 }
