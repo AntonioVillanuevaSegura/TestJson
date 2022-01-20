@@ -1,5 +1,5 @@
 /*
-* Test y uso de JSONTokener Antonio Villanueva Segura
+* Test Scanner QR and JSON Antonio Villanueva Segura
 * https://developer.android.com/reference/org/json/JSONTokener
  */
 package com.example.testjson
@@ -9,8 +9,6 @@ import android.os.Bundle
 import com.example.testjson.databinding.ActivityMainBinding
 import com.journeyapps.barcodescanner.ScanContract
 import com.journeyapps.barcodescanner.ScanIntentResult
-
-
 import com.journeyapps.barcodescanner.ScanOptions
 
 class MainActivity : AppCompatActivity() {
